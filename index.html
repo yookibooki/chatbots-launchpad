@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" sizes="any">
+<title>Chatbots</title>
+<style>
+    :root {
+        --button-size: 128px;
+        --border-radius: 30px;
+        --gap: 15px;
+    }
+
+    body {
+        background-color: #1e1e1e;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(var(--button-size), 1fr));
+        gap: var(--gap);
+        width: 90%;
+        max-width: 600px;
+        padding: 20px 0;
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--button-size);
+        height: var(--button-size);
+        background-color: #333;
+        border-radius: var(--border-radius);
+        transition: background-color 0.3s;
+    }
+
+    .button:focus {
+        outline: 2px solid #000;
+        outline-offset: 4px;
+    }
+
+    .button img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    .button:hover {
+        background-color: #555;
+    }
+
+    @media (max-width: 480px) {
+        :root {
+            --button-size: 96px;
+            --border-radius: 25px;
+            --gap: 10px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        :root {
+            --button-size: 128px;
+            --gap: 15px;
+        }
+        .container {
+            max-width: 1000px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <a href="https://claude.ai" class="button"><img src="logos/Claude.svg" alt="Claude"></a>
+        <a href="https://chat.deepseek.com" class="button"><img src="logos/DeepSeek.svg" alt="DeepSeek"></a>
+        <a href="https://chatgpt.com" class="button"><img src="logos/ChatGPT.svg" alt="ChatGPT"></a>
+        <a href="https://gemini.google.com/app" class="button"><img src="logos/gemini.google.com.png" alt="Gemini"></a>
+        <a href="https://chat.qwenlm.ai" class="buttozn"><img src="logos/chat.qwenlm.ai.png" alt="Qwen"></a>
+        <a href="https://huggingface.co/chat" class="button"><img src="logos/huggingface.co.png" alt="Hugging Face Chat"></a>
+        <a href="https://copilot.microsoft.com" class="button"><img src="logos/Copilot.svg" alt="Copilot"></a>
+        <a href="https://chat.minimax.io" class="button"><img src="logos/MiniMax.png" alt="HaiLuo"></a>
+        <a href="https://duck.ai" class="button"><img src="logos/DuckDuckGo.svg" alt="Duck AI"></a>
+        <a href="https://grok.com/chat" class="button"><img src="logos/Grok.svg" alt="Grok"></a>
+        <a href="https://lambda.chat" class="button"><img src="logos/Lambda.svg" alt="Lambda"></a>
+        <a href="https://www.perplexity.ai" class="button"><img src="logos/Perplexity.svg" alt="Perplexity"></a>
+        <a href="https://www.phind.com" class="button"><img src="logos/phind.com.png" alt="Phind"></a>
+        <a href="https://www.blackbox.ai" class="button"><img src="logos/blackbox.ai.png" alt="Blackbox AI"></a>
+        <a href="https://yuanbao.tencent.com" class="button"><img src="logos/yuanbao.tencent.com.png" alt="YuanBao"></a>
+        <a href="https://v0.dev" class="button"><img src="logos/v0.dev.png" alt="V0.dev"></a>
+        <a href="https://you.com" class="button"><img src="logos/you.com.png" alt="You.com"></a>
+        <a href="https://chat.together.ai" class="button"><img src="logos/chat.together.ai.png" alt="Together AI"></a>
+        <a href="https://hix.ai" class="button"><img src="logos/hix.ai.png" alt="Hix AI"></a>
+        <a href="https://www.morphic.sh" class="button"><img src="logos/morphic.sh.png" alt="Morphic"></a>
+        <a href="https://getliner.com" class="button"><img src="logos/getliner.com.png" alt="Liner"></a>
+        <a href="https://scira.ai" class="button"><img src="logos/scira.ai.png" alt="Scira AI"></a>
+        <a href="https://andisearch.com" class="button"><img src="logos/andisearch.com.ico" alt="Andi Search"></a>
+        <a href="https://iask.ai" class="button"><img src="logos/iask.ai.png" alt="iAsk AI"></a>
+        <a href="https://www.bing.com/copilotsearch" class="button"><img src="logos/copilot.microsoft.com.png" alt="Copilot Search"></a>
+        <a href="https://hika.fyi" class="button"><img src="logos/hika.fyi.png" alt="Hika"></a>
+        <a href="https://yep.com/chat" class="button"><img src="logos/yep.com.png" alt="Yep Chat"></a>
+        <a href="https://komo.ai" class="button"><img src="logos/komo.ai.png" alt="Komo AI"></a>
+        <a href="https://bagoodex.io" class="button"><img src="logos/bagoodex.io.png" alt="Bagoodex"></a>
+        <a href="https://d37ozmhmvu2kcg.cloudfront.net" class="button"><img src="logos/perplexity.ai.png" alt="Perplexed"></a>
+        <a href="https://huggingface.co/spaces/openfree/Deepseek-v3-0324-Research" class="button"><img src="logos/https___chat.deepseek.com.png" alt="Deepseek v3 Research"></a>
+        <a href="https://labs.perplexity.ai" class="button"><img src="logos/labs.perplexity.ai.png" alt="Perplexity Labs"></a>
+        <a href="https://api.together.xyz/playground/v2/chat/deepseek-ai/DeepSeek-V3" class="button"><img src="logos/together.xyz.png" alt="DeepSeek V3 Playground"></a>
+        <a href="https://github.com/marketplace/models/azureml-deepseek/DeepSeek-V3-0324/playground" class="button"><img src="logos/docs.github.com.png" alt="DeepSeek V3 AzureML"></a>
+        <a href="https://fireworks.ai/models/fireworks/deepseek-r1/playground" class="button"><img src="logos/fireworks.ai.png" alt="DeepSeek R1 Fireworks"></a>
+        <a href="https://notebooklm.google.com" class="button"><img src="logos/notebooklm.google.png" alt="NotebookLM"></a>
+        <a href="https://www.genspark.ai" class="button"><img src="logos/genspark.ai.png" alt="Genspark"></a>
+    </div>
+</body>
+</html>
