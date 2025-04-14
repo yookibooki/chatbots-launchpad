@@ -1,0 +1,142 @@
+/* Use border-box globally for easier sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --button-size: 128px;
+    --border-radius: 30px;
+    --gap: 20px;
+    --focus-outline-color: #6bbaff;
+}
+
+body {
+    background-color: #1e1e1e;
+    color: #fff;
+    /* Optimized font stack */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
+    padding: 20px 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-content {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #eee;
+    font-weight: 300;
+    font-size: 2.5em;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(var(--button-size) + 10px), 1fr));
+    gap: var(--gap);
+    width: 100%;
+    justify-items: center;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.button {
+    display: flex; /* Use flex for centering image */
+    justify-content: center;
+    align-items: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: #333;
+    border-radius: var(--border-radius);
+    transition: background-color 0.25s ease-out, transform 0.2s ease-out, box-shadow 0.25s ease-out; /* Slightly faster transitions */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 8px;
+    overflow: hidden;
+    /* will-change: transform, box-shadow; */ /* Consider adding only if profiling shows benefit */
+}
+
+/* Target both img and picture elements inside the button */
+.button img,
+.button picture {
+    display: flex; /* Ensure picture element behaves correctly */
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 85%;
+}
+.button img { /* Style the actual image tag */
+     max-width: 100%; /* Ensure image scales down if needed */
+     max-height: 100%;
+     object-fit: contain;
+}
+
+
+.button:hover {
+    background-color: #484848;
+    transform: translateY(-4px); /* Keep moderate transform */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.button:focus {
+    outline: none;
+}
+.button:focus-visible {
+    outline: 3px solid var(--focus-outline-color);
+    outline-offset: 3px;
+    background-color: #404040;
+}
+
+.button-label {
+    font-size: 0.9em;
+    color: #ccc;
+    max-width: calc(var(--button-size) + 10px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+}
+
+/* Responsive Adjustments (Keep as is, already efficient) */
+@media (max-width: 767px) {
+    :root {
+        --button-size: 96px;
+        --border-radius: 25px;
+        --gap: 15px;
+    }
+    h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .main-content {
+       max-width: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --button-size: 80px;
+        --border-radius: 20px;
+        --gap: 10px;
+    }
+     h1 {
+        font-size: 1.8em;
+    }
+    .button-label {
+        font-size: 0.8em;
+    }
+     .main-content {
+       padding: 0 10px;
+    }
+}
