@@ -29,14 +29,12 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            scroll-behavior: smooth;
         }
 
         body {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
-            padding: 2rem 1rem;
+            padding: 3rem 1.5rem;
         }
 
         .container {
@@ -45,34 +43,19 @@
             margin: 0 auto;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: #a0a0a0;
-        }
-
         #chatbot-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1.5rem;
-            flex-grow: 1;
+            /* Adjusted minmax for slightly larger base card size */
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
         }
 
         .chatbot-card {
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
+            /* Increased border-radius for "curvy" look */
+            border-radius: 24px;
+            padding: 2rem;
             text-decoration: none;
             color: var(--text-color);
             display: flex;
@@ -81,49 +64,44 @@
             justify-content: center;
             text-align: center;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-            box-shadow: 0 4px 8px var(--shadow-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .chatbot-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-color);
-            box-shadow: 0 8px 16px var(--shadow-color);
+            box-shadow: 0 10px 20px var(--shadow-color);
         }
 
         .chatbot-card .icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 1rem;
+            /* Bigger icons */
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
             object-fit: contain;
         }
 
         .chatbot-card .name {
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            color: #777;
-            font-size: 0.9rem;
-        }
-
         /* Status message for service worker */
         #status {
             position: fixed;
-            bottom: 10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--accent-color);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 0.9em;
             opacity: 0;
             transition: opacity 0.5s, transform 0.5s;
             pointer-events: none;
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         #status.show {
@@ -132,28 +110,29 @@
         }
 
         @media (max-width: 600px) {
-            body { padding: 1rem 0.5rem; }
-            header h1 { font-size: 2rem; }
-            #chatbot-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
-            .chatbot-card .icon { width: 48px; height: 48px; }
+            body { padding: 2rem 1rem; }
+            #chatbot-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+                gap: 1.5rem; 
+            }
+            .chatbot-card {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+            .chatbot-card .icon { 
+                /* Slightly smaller icons for mobile */
+                width: 64px; 
+                height: 64px; 
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
-            <h1>AI Chatbot Launcher</h1>
-            <p>Your quick access portal to leading AI assistants.</p>
-        </header>
-
         <main id="chatbot-grid">
             <!-- Chatbot cards will be dynamically injected here -->
         </main>
-        
-        <footer>
-            <p id="footer-status">Offline-ready. Built with modern web tech.</p>
-        </footer>
     </div>
 
     <div id="status"></div>
@@ -195,13 +174,10 @@
 
         // --- 2. SERVICE WORKER IMPLEMENTATION ---
         
-        // Define Service Worker logic as a string. This is key to keeping it in one file.
         const serviceWorkerCode = () => {
-            const CACHE_NAME = 'ai-launcher-cache-v1';
-            // The URLs to cache are passed in during registration
+            const CACHE_NAME = 'ai-launcher-cache-v2'; // Cache version updated
             const URLS_TO_CACHE = self.__URLS_TO_CACHE;
 
-            // Install event: cache all essential assets
             self.addEventListener('install', event => {
                 event.waitUntil(
                     caches.open(CACHE_NAME)
@@ -212,7 +188,6 @@
                 );
             });
 
-            // Activate event: clean up old caches
             self.addEventListener('activate', event => {
                 event.waitUntil(
                     caches.keys().then(cacheNames => {
@@ -228,17 +203,11 @@
                 );
             });
 
-            // Fetch event: serve from cache first, then network
             self.addEventListener('fetch', event => {
                 event.respondWith(
                     caches.match(event.request)
                         .then(response => {
-                            // Cache hit - return response
-                            if (response) {
-                                return response;
-                            }
-                            // Not in cache - fetch from network
-                            return fetch(event.request);
+                            return response || fetch(event.request);
                         })
                 );
             });
@@ -246,11 +215,9 @@
 
         function registerServiceWorker() {
             if ('serviceWorker' in navigator) {
-                // Generate the list of URLs to cache
                 const iconUrls = chatbotData.map(bot => `${baseIconUrl}${bot.slug}`);
                 const urlsToCache = ['/', ...iconUrls];
 
-                // Create the full SW code string with the dynamic cache list
                 const swString = `
                     self.__URLS_TO_CACHE = ${JSON.stringify(urlsToCache)};
                     (${serviceWorkerCode.toString()})();
@@ -262,10 +229,8 @@
                 navigator.serviceWorker.register(swUrl)
                     .then(registration => {
                         console.log('Service Worker registered with scope:', registration.scope);
-                        // Optional: Check if the page is being controlled by a SW
                         if (navigator.serviceWorker.controller) {
-                            showStatus("Page loaded from cache. Ready for offline use!");
-                            document.getElementById('footer-status').textContent = 'Ready for offline use.';
+                            showStatus("Loaded from cache. Ready for offline use!");
                         } else {
                             showStatus("App cached. Now available offline.");
                         }
