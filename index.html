@@ -34,6 +34,7 @@
         body {
             display: flex;
             min-height: 100vh;
+            align-items: center; /* Center the grid vertically */
             padding: 3rem 1.5rem;
         }
 
@@ -45,15 +46,14 @@
 
         #chatbot-grid {
             display: grid;
-            /* Adjusted minmax for slightly larger base card size */
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            /* Adjusted minmax to better fit larger icons */
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 2rem;
         }
 
         .chatbot-card {
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
-            /* Increased border-radius for "curvy" look */
             border-radius: 24px;
             padding: 2rem;
             text-decoration: none;
@@ -74,9 +74,9 @@
         }
 
         .chatbot-card .icon {
-            /* Bigger icons */
-            width: 80px;
-            height: 80px;
+            /* BIGGER icons */
+            width: 100px;
+            height: 100px;
             margin-bottom: 1.5rem;
             object-fit: contain;
         }
@@ -86,7 +86,6 @@
             font-size: 1.1rem;
         }
         
-        /* Status message for service worker */
         #status {
             position: fixed;
             bottom: 15px;
@@ -112,7 +111,7 @@
         @media (max-width: 600px) {
             body { padding: 2rem 1rem; }
             #chatbot-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
                 gap: 1.5rem; 
             }
             .chatbot-card {
@@ -120,9 +119,9 @@
                 border-radius: 20px;
             }
             .chatbot-card .icon { 
-                /* Slightly smaller icons for mobile */
-                width: 64px; 
-                height: 64px; 
+                /* Adjusted mobile icon size */
+                width: 72px; 
+                height: 72px; 
             }
         }
     </style>
@@ -175,7 +174,7 @@
         // --- 2. SERVICE WORKER IMPLEMENTATION ---
         
         const serviceWorkerCode = () => {
-            const CACHE_NAME = 'ai-launcher-cache-v2'; // Cache version updated
+            const CACHE_NAME = 'ai-launcher-cache-v3'; // Cache version updated for new styles
             const URLS_TO_CACHE = self.__URLS_TO_CACHE;
 
             self.addEventListener('install', event => {
